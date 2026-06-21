@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>蒋左丞 | 作品集图册</title>
+    <link rel="stylesheet" href="styles.css?v=20260621-4" />
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <div class="ambient__image"></div>
+      <div class="ambient__veil"></div>
+      <div class="grain"></div>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="返回首页">
+        <span class="brand__mark">JZC</span>
+        <span class="brand__text">Portfolio Archive</span>
+      </a>
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="#home" id="nav-home">返回目录</a>
+        <span class="nav-page" id="nav-page">目录</span>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="view view--home is-active" aria-labelledby="home-title">
+        <div class="home-copy">
+          <p class="eyebrow">Visual Communication / Graduation Design</p>
+          <h1 id="home-title">
+            <span class="home-title__name">蒋左丞</span>
+            <span class="home-title__label">作品集</span>
+          </h1>
+          <p class="lead">
+            图册式作品浏览原型。首版收录毕业设计图册，重点放在清晰观看对开页面、稳定翻页和移动端竖屏浏览。
+          </p>
+          <a class="contact-qr" href="assets/contact/wechat-qr-original.png" target="_blank" rel="noreferrer" aria-label="打开微信二维码">
+            <img src="assets/contact/wechat-qr-white.png" alt="微信二维码" />
+          </a>
+        </div>
+
+        <div class="shelf" id="project-shelf" aria-label="作品图册目录"></div>
+      </section>
+
+      <section id="reader" class="view view--reader" aria-labelledby="reader-title">
+        <div class="reader-shell">
+          <aside class="reader-panel">
+            <button class="ghost-button" type="button" data-action="home">返回目录</button>
+            <p class="eyebrow">Book Viewer</p>
+            <h2 id="reader-title">毕业设计图册</h2>
+            <p class="reader-panel__desc" id="reader-desc">
+              每一屏保留完整对开页面。桌面端可用左右按钮或键盘方向键，手机端可直接滑动。
+            </p>
+            <div class="reader-stats" aria-live="polite">
+              <span id="page-current">01</span>
+              <span class="reader-stats__bar"></span>
+              <span id="page-total">40</span>
+            </div>
+          </aside>
+
+          <div class="stage" aria-label="图册浏览器">
+            <div class="orientation-notice" aria-hidden="true">
+              <span id="orientation-title">横屏查看图册</span>
+              <small id="orientation-desc">这本图册是对开横版设计，横屏时页面更清晰。</small>
+            </div>
+
+            <button class="nav-button nav-button--prev" type="button" data-action="prev" aria-label="上一页">
+              <span aria-hidden="true">‹</span>
+            </button>
+
+            <div class="book-stage" id="book-stage" tabindex="0">
+              <div class="spread" id="spread"></div>
+            </div>
+
+            <button class="nav-button nav-button--next" type="button" data-action="next" aria-label="下一页">
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="data/projects.js?v=20260621-5"></script>
+    <script src="script.js?v=20260621-5"></script>
+  </body>
+</html>
