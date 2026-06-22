@@ -30,4 +30,16 @@ window.PORTFOLIO_PROJECTS = [
     orientationTitle: "横屏查看图册",
     orientationDescription: "这本图册是对开横版设计，横屏时页面更清晰。",
   },
+  {
+    id: "video-work",
+    title: "破界者说：黄沙与霓虹",
+    year: "2025",
+    type: "B站视频",
+    description: "作品视频链接入口。",
+    kicker: "Bilibili Video",
+    line: "2025 · 视频作品 · B站链接",
+    cover: "assets/video-work/cover.webp",
+    kind: "video",
+    url: "https://www.bilibili.com/video/BV1qb9iYMESq/",
+  },
 ];

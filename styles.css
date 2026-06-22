@@ -337,6 +337,78 @@ h1 {
   font-size: 14px;
 }
 
+.view--video.is-active {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+}
+
+.video-shell {
+  display: grid;
+  width: min(760px, 100%);
+  place-items: center;
+}
+
+.video-panel {
+  display: grid;
+  width: min(560px, 100%);
+  justify-items: start;
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(18, 17, 14, 0.52);
+  box-shadow: var(--shadow-deep);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+}
+
+.video-preview {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 28px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(15, 14, 12, 0.72);
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.36);
+  text-decoration: none;
+}
+
+.video-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.36)),
+    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.3));
+}
+
+.video-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-panel h2 {
+  margin-bottom: 28px;
+  font-family: Georgia, "Times New Roman", "SimSun", serif;
+  font-size: clamp(44px, 7vw, 86px);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.video-link--large {
+  margin-top: 0;
+  padding: 14px 18px 14px 12px;
+}
+
 .shelf {
   position: relative;
   display: grid;
@@ -387,12 +459,23 @@ h1 {
   transform: rotate(6deg) translateY(10px);
 }
 
+.book-stack--video {
+  width: min(86%, 380px);
+  aspect-ratio: 16 / 10;
+  margin: 0 auto;
+  transform: rotate(-3deg) translateY(8px);
+}
+
 .book-card__hit:hover .book-stack {
   transform: rotate(-4deg) translateY(-8px) scale(1.015);
 }
 
 .book-card--portrait .book-card__hit:hover .book-stack {
   transform: rotate(3deg) translateY(-8px) scale(1.015);
+}
+
+.book-card__hit:hover .book-stack--video {
+  transform: rotate(-1deg) translateY(-8px) scale(1.015);
 }
 
 .book-stack__sheet,
@@ -425,6 +508,52 @@ h1 {
   height: 100%;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.video-cover {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(15, 14, 12, 0.72);
+}
+
+.video-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.38)),
+    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.34));
+}
+
+.video-cover__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-cover__play {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(244, 239, 229, 0.94);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.38);
+}
+
+.video-cover__play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 20px solid #17130d;
 }
 
 .book-card__meta {
@@ -555,6 +684,8 @@ h1 {
 }
 
 .spread {
+  display: grid;
+  justify-items: center;
   width: 100%;
   transform-style: preserve-3d;
   transition: transform 220ms ease;
@@ -568,7 +699,7 @@ h1 {
   position: relative;
   display: grid;
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   padding: clamp(10px, 1.2vw, 18px);
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: 8px;
@@ -741,8 +872,17 @@ h1 {
     transform: rotate(4deg);
   }
 
+  .book-stack--video {
+    width: min(84%, 320px);
+    transform: rotate(-2deg);
+  }
+
   .book-card--portrait .book-card__hit:hover .book-stack {
     transform: rotate(3deg) translateY(-6px) scale(1.01);
+  }
+
+  .book-card__hit:hover .book-stack--video {
+    transform: rotate(-1deg) translateY(-6px) scale(1.01);
   }
 
   .book-stack__sheet--back {

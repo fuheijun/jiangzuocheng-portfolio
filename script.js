@@ -11,6 +11,7 @@
   const views = {
     home: document.querySelector(".view--home"),
     reader: document.querySelector(".view--reader"),
+    video: document.querySelector(".view--video"),
   };
   const ambient = document.querySelector(".ambient__image");
   const projectShelf = document.getElementById("project-shelf");
@@ -24,6 +25,10 @@
   const readerDesc = document.getElementById("reader-desc");
   const orientationTitle = document.getElementById("orientation-title");
   const orientationDesc = document.getElementById("orientation-desc");
+  const videoTitle = document.getElementById("video-title");
+  const videoLink = document.getElementById("video-link");
+  const videoPreview = document.getElementById("video-preview");
+  const videoPreviewImg = document.getElementById("video-preview-img");
 
   function padPage(value) {
     return String(value).padStart(2, "0");
@@ -65,23 +70,39 @@
         button.className = "book-card__hit";
         button.type = "button";
         button.setAttribute("aria-label", `打开${project.title}`);
-        button.addEventListener("click", () => openProject(project.id));
+        button.addEventListener("click", () => {
+          if (project.kind === "video") {
+            openVideoProject(project.id);
+          } else {
+            openProject(project.id);
+          }
+        });
         button.addEventListener("mouseenter", () => setAmbient(project.cover));
 
         const stack = document.createElement("span");
-        stack.className = "book-stack";
+        stack.className = project.kind === "video" ? "book-stack book-stack--video" : "book-stack";
         stack.setAttribute("aria-hidden", "true");
 
         const back = document.createElement("span");
         back.className = "book-stack__sheet book-stack__sheet--back";
         const middle = document.createElement("span");
         middle.className = "book-stack__sheet book-stack__sheet--middle";
-        const cover = document.createElement("img");
-        cover.className = "book-stack__cover";
-        cover.src = project.cover;
-        cover.alt = "";
-        cover.loading = index === 0 ? "eager" : "lazy";
-        cover.decoding = "async";
+        let cover;
+        if (project.kind === "video") {
+          cover = document.createElement("span");
+          cover.className = "book-stack__cover video-cover";
+          cover.innerHTML = `
+            <img class="video-cover__image" src="${project.cover}" alt="" loading="lazy" decoding="async" />
+            <span class="video-cover__play"></span>
+          `;
+        } else {
+          cover = document.createElement("img");
+          cover.className = "book-stack__cover";
+          cover.src = project.cover;
+          cover.alt = "";
+          cover.loading = index === 0 ? "eager" : "lazy";
+          cover.decoding = "async";
+        }
 
         stack.append(back, middle, cover);
 
@@ -198,11 +219,27 @@
     stage.focus({ preventScroll: true });
   }
 
+  function openVideoProject(projectId, updateHash = true) {
+    const project = projects.find((item) => item.id === projectId) || projects.find((item) => item.kind === "video");
+    if (!project) return;
+    state.project = project;
+    if (videoTitle) videoTitle.textContent = project.title;
+    if (videoLink) videoLink.href = project.url;
+    if (videoPreview) videoPreview.href = project.url;
+    if (videoPreviewImg) videoPreviewImg.src = project.cover;
+    if (navPage) navPage.textContent = project.title;
+    setAmbient(project.cover);
+    showView("video", updateHash ? `video/${project.id}` : window.location.hash.slice(1));
+  }
+
   function handleHash() {
     const hash = window.location.hash.replace(/^#/, "");
     if (hash.startsWith("reader")) {
       const projectId = hash.split(/[=/]/)[1] || state.project.id;
       openProject(projectId, false);
+    } else if (hash.startsWith("video")) {
+      const projectId = hash.split(/[=/]/)[1] || "video-work";
+      openVideoProject(projectId, false);
     } else {
       showView("home");
       setAmbient(state.project.cover);
